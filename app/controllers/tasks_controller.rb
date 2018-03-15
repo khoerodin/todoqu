@@ -1,37 +1,28 @@
 class TasksController < ApplicationController
   def index
-    @dues = dues
+    @dues = dues 
     @tasks = tasks
   end
 
-  def excel_export
-    @tasks = tasks
-    respond_to do |format|
-      format.xls { set_file_name "export.xls" }
-    end
-  end
+  def filter
+    filter = params[:filter]
+    sort = params[:sort]
 
-  def sorted_by
-    sorted_by = params[:sorted_by]
-
-    if sorted_by == 'last_created'
-      @tasks = Task.where(user_id: current_user[:id])
-        .order('created_at DESC')
-    elsif sorted_by == 'due'
-      @tasks = Task.where(user_id: current_user[:id])
-        .order('due')
-    elsif sorted_by === 'priority'
-      @tasks = Task.where(user_id: current_user[:id])
-        .order('priority')
-    elsif sorted_by === 'name'
-      @tasks = Task.where(user_id: current_user[:id])
-        .order('name')
+    # show / filter by
+    if filter == 'today'
+      tasks = mine.where(due: Date.today)
+    elsif filter == 'queue'
+      tasks = mine.where('DATE(due) > ?', Date.today)
+    elsif filter == 'completed'
+      tasks = mine.where(completed: true)
     else
-      @tasks = Task.where(user_id: current_user[:id])
-        .order('created_at DESC')
+      tasks = mine
     end
-
-    render partial: 'all_task', locals: { tasks: @tasks }, layout: false 
+    
+    # sorted by
+    @tasks = tasks.order(sort == 'created_at' ? sort + " DESC" : sort)
+    
+    render partial: 'tasks', locals: { tasks: @tasks }, layout: false 
   end
 
   def new
@@ -50,7 +41,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
+    task = mine.find(params[:id])
     task.completed = params[:completed]
     updated = task.save
 
@@ -66,7 +57,7 @@ class TasksController < ApplicationController
 
   def all
     @tasks = tasks
-    render partial: 'all_task', locals: { tasks: @tasks }, layout: false
+    render partial: 'tasks', locals: { tasks: @tasks }, layout: false
   end
 
   def destroy
@@ -79,18 +70,20 @@ class TasksController < ApplicationController
   end
 
   private
-    ## white list
+    def mine
+      Task.where(user_id: current_user[:id])
+    end
+
     def task_params
       params.require(:task).permit(:name, :priority, :due, :completed)
     end
 
     def dues
-      Task.where(user_id: current_user[:id]).where('DATE(due) = ?', Date.today)
-        .where(:completed => false)
+      mine.where(due: Date.today)
+        .where(completed: false)
     end
 
     def tasks
-      Task.where(user_id: current_user[:id])
-        .order('created_at DESC')
+      mine.order('created_at DESC')
     end
 end

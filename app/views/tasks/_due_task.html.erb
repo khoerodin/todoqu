@@ -20,14 +20,15 @@
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" name="task-check" <%= checked %> class="custom-control-input" id="<%= due.id %>">
                       <label class="custom-control-label pointer" for="<%= due.id %>"><%= due.name %></label>
-                      <small class="text-danger delete-link">
-                        <%= link_to 'DELETE', destroy_path(due.id), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: "text-danger" %>
-                      </small>
+                      <span class="badge badge-<%= task_priority('badge', due.priority) %> mx-2">
+                        <%= task_priority('text', due.priority) %>
+                      </span>
                     </div>
-                                                      
-                    <span class="badge badge-<%= task_priority('badge', due.priority) %>">
-                      <%= task_priority('text', due.priority) %>
-                    </span>
+
+                    <div>
+                      <span class="text-muted mx-3"><%= due.due.strftime('%d %b %Y') %></span>
+                      <%= link_to '×', destroy_path(due.id), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: "delete-link text-danger", title: "Delete this task" %>
+                    </div>
                   </li>
                 <% end %>
             <% end %>

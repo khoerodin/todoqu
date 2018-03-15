@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/export', to: 'tasks#excel_export'
 
-  post '/sorting', to: 'tasks#sorted_by'
+  post '/filter', to: 'tasks#filter'
   
   get '/new', to: 'tasks#new'
 

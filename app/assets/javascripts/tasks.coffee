@@ -18,17 +18,17 @@ $(document).ready ->
       type: 'GET'
       dataType: 'html'
       success: (data, textStatus, jqXHR) ->
-        $('#all').html(data);
+        $('#tasks').html(data);
       error: (jqXHR, textStatus, errorThrown) ->
         alert textStatus
 
-  $(document).on('change', '#sortedBy', ( ->
-    $.ajax '/sorting',
+  $(document).on('change', '#filter, #sort', ( ->
+    $.ajax '/filter',
       type: 'POST'
       dataType: 'html'
-      data: { sorted_by: this.value }
+      data: { filter: $('#filter').val(), sort: $('#sort').val() }
       success: (data, textStatus, jqXHR) ->
-        $('#all').html(data)
+        $('#tasks').html(data)
       error: (jqXHR, textStatus, errorThrown) ->
         alert textStatus
   ))
