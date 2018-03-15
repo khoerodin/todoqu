@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'tasks#index'
 
+  get '/export', to: 'tasks#excel_export'
+
   post '/sorting', to: 'tasks#sorted_by'
   
   get '/new', to: 'tasks#new'

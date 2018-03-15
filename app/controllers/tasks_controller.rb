@@ -4,6 +4,13 @@ class TasksController < ApplicationController
     @tasks = tasks
   end
 
+  def excel_export
+    @tasks = tasks
+    respond_to do |format|
+      format.xls { set_file_name "export.xls" }
+    end
+  end
+
   def sorted_by
     sorted_by = params[:sorted_by]
 
