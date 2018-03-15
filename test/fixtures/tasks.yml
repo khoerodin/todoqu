@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  priority: 1
+  due: 2018-03-14
+  completed: false
+  users: one
+
+two:
+  name: MyString
+  priority: 1
+  due: 2018-03-14
+  completed: false
+  users: two

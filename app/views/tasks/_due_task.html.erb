@@ -1,0 +1,36 @@
+<div class="card border-1 mb-3 bg-light <% if !! @dues.empty? %> d-none<% end %>">
+    <div class="card-header border-0 text-danger">
+        Due Today
+    </div>
+
+    <div class="card-body">
+        <ul class="list-group" id="dueTaskList">
+            <% if ! @dues.empty? %>
+                <% @dues.each do |due| %>
+                
+                  <% 
+                    if due.completed 
+                      checked = "checked"
+                    else 
+                      checked = ""
+                    end
+                  %>
+
+                  <li class="list-group-item d-flex justify-content-between align-items-center task-list">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="task-check" <%= checked %> class="custom-control-input" id="<%= due.id %>">
+                      <label class="custom-control-label pointer" for="<%= due.id %>"><%= due.name %></label>
+                      <small class="text-danger delete-link">
+                        <%= link_to 'DELETE', destroy_path(due.id), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: "text-danger" %>
+                      </small>
+                    </div>
+                                                      
+                    <span class="badge badge-<%= task_priority('badge', due.priority) %>">
+                      <%= task_priority('text', due.priority) %>
+                    </span>
+                  </li>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
+</div>

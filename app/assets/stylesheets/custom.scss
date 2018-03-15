@@ -1,0 +1,17 @@
+@import "bootstrap";
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+input[name=task-check][type=checkbox]:checked + label.custom-control-label {
+  text-decoration: line-through;
+}
+
+.delete-link {
+  display: none;
+}
+
+.task-list:hover .delete-link { 
+  display: inline;
+}
