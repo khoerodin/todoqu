@@ -2,7 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready ->
+$(document).on 'turbolinks:before-cache', ->
+    $('select.form-control').select2({theme: "bootstrap"})
+
+$(document).on 'turbolinks:load', ->
+  $('select.form-control').select2({theme: "bootstrap"})
+
+$(document).on 'ready', ->  
 
   window.due = () ->
     $.ajax '/due',
@@ -14,11 +20,12 @@ $(document).ready ->
         alert textStatus
     
   window.all = () ->
-    $.ajax '/all',
-      type: 'GET'
+    $.ajax '/filter',
+      type: 'POST'
       dataType: 'html'
+      data: { filter: $('#filter').val(), sort: $('#sort').val() }
       success: (data, textStatus, jqXHR) ->
-        $('#tasks').html(data);
+        $('#tasks').html(data)
       error: (jqXHR, textStatus, errorThrown) ->
         alert textStatus
 

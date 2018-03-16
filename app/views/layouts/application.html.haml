@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Todoqu
+    = render 'layouts/rails_header'
+    = render 'layouts/shim'
+  %body
+    %nav.navbar.navbar-expand-md.navbar-light
+      .container
+        = link_to "Todoqu", root_path, class: "navbar-brand"
+        %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
+          / Left Side Of Navbar
+          %ul.navbar-nav.mr-auto
+          / Right Side Of Navbar
+          %ul.navbar-nav.ml-auto
+            - if user_signed_in?
+              %li.nav-item.dropdown
+                %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button", "v-pre" => ""}
+                  = current_user[:email]
+                  %span.caret
+                .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                  = link_to('Edit registration', edit_user_registration_path, class: "dropdown-item")
+                  = link_to('Logout', destroy_user_session_path, :method => :delete, class: "dropdown-item")
+            - else
+              %li= link_to('Log in', new_user_session_path, class: "nav-link")
+              %li= link_to('Sign up', new_user_registration_path, class: "nav-link")
+    %main.py-4
+      .container
+        .row.justify-content-center
+          .col-md-12
+            - if notice
+              .alert.alert-success.alert-dismissible.fade.show{:role => "alert"}
+                = notice
+                %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+                  %span{"aria-hidden" => "true"} ×
+            - if alert
+              .alert.alert-warning.alert-dismissible.fade.show{:role => "alert"}
+                = alert
+                %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+                  %span{"aria-hidden" => "true"} ×
+      = yield

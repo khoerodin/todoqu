@@ -66,5 +66,7 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'devise'
 gem 'simple_form'
+gem 'select2-rails'
+gem "haml-rails", "~> 1.0"
 # gem 'axlsx_rails'
 # gem 'zip-zip'
