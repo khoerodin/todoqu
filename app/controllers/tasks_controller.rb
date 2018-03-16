@@ -56,7 +56,7 @@ class TasksController < ApplicationController
 
   def due
     @dues = dues
-    render partial: 'due_task', locals: { dues: @dues }, layout: false
+    render partial: 'dues', locals: { dues: @dues }, layout: false
   end
 
   def all
