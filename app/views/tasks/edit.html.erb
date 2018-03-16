@@ -7,7 +7,7 @@
           <%= simple_form_for @task, url: update_path(@task.id), method: "put" do |f| %>
             <%= f.input :name %>
             <%= f.input :priority, collection: [['Critical', 1], ['High', 2], ['Medium', 3], ['Low', 4]] %>
-            <%= f.input :due %>
+            <%= f.input :due, as: :date, order: [:day, :month, :year] %>
             <%= f.input :completed %>
             <%= f.button :submit, class: "btn btn-primary" %>
           <% end %>
