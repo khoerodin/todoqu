@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     if filter == 'today'
       tasks = mine.where(due: Date.today)
     elsif filter == 'queue'
-      tasks = mine.where('DATE(due) > ?', Date.today)
+      tasks = mine.where('DATE(due) > ?', Date.today).where(completed: false)
     elsif filter == 'completed'
       tasks = mine.where(completed: true)
     else
