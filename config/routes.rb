@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   get '/new', to: 'tasks#new'
 
   post '/create', to: 'tasks#create'
+  get '/create' => redirect('/')
 
   get '/edit/:id', to: 'tasks#edit', as: "edit"
 
   put '/update/:id', to: 'tasks#update', as: "update"
+  get '/update' => redirect('/')
 
   get '/due', to: 'tasks#due'
 

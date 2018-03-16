@@ -29,7 +29,7 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  def create
+  def create    
     @user = User.find(current_user[:id])
     @task = @user.tasks.new(task_params)
 
