@@ -67,6 +67,6 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'simple_form'
 gem 'select2-rails'
-gem "haml-rails", "~> 1.0"
+gem "haml"
 # gem 'axlsx_rails'
 # gem 'zip-zip'
