@@ -1,0 +1,40 @@
+.container
+
+  .row.justify-content-center
+    .col-md-5.mt-5
+
+      %h1.display-4.mb-4 Edit #{resource_name.to_s.humanize}
+      = devise_error_messages!
+
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "off", class: "form-control"
+          %small.form-text.text-muted
+            Leave blank if you don't want to change it
+            
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+        
+        %hr
+
+        .form-group
+          = f.label :current_password
+          = f.password_field :current_password, autocomplete: "off", class: "form-control"
+
+        .form-row
+          .col-auto.mt-3
+            = f.submit "Update", class: "btn btn-primary"
+
+          .col-auto.mt-3
+            = link_to "Back", :back, class: "btn btn-success"
