@@ -37,9 +37,10 @@ $(document).ready ->
     $.ajax '/update/'+ $(this).attr('id'),
       type: 'PUT'
       dataType: 'html'
-      data: { completed: $(this).is(':checked') }
+      data: { 'task[completed]': $(this).is(':checked') }
       success: (data, textStatus, jqXHR) ->
-        due() all()
+        due() 
+        all()
       error: (jqXHR, textStatus, errorThrown) ->
         alert textStatus
   ))

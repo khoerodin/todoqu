@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   root 'tasks#index'
 
-  get '/export', to: 'tasks#excel_export'
-
   post '/filter', to: 'tasks#filter'
   
   get '/new', to: 'tasks#new'
 
   post '/create', to: 'tasks#create'
 
-  put '/update/:id', to: 'tasks#update'
+  get '/edit/:id', to: 'tasks#edit', as: "edit"
+
+  put '/update/:id', to: 'tasks#update', as: "update"
 
   get '/due', to: 'tasks#due'
 

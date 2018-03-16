@@ -20,7 +20,7 @@
 
         <div>
           <span class="mx-3"><%= task.due.strftime('%d %b %Y') %></span>
-          <%= link_to 'edit', destroy_path(task.id), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: "text-muted", title: "Edit this task" %> 
+          <%= link_to 'edit', edit_path(task.id), class: "text-muted", title: "Edit this task" %> 
           <span class="text-muted">•</span>
           <%= link_to 'delete', destroy_path(task.id), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: "text-muted", title: "Delete this task" %>
         </div>

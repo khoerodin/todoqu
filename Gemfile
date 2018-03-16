@@ -65,5 +65,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'devise'
-gem 'axlsx_rails'
-gem 'zip-zip'
+gem 'simple_form'
+# gem 'axlsx_rails'
+# gem 'zip-zip'

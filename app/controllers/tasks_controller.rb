@@ -40,13 +40,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def update
-    task = mine.find(params[:id])
-    task.completed = params[:completed]
-    updated = task.save
+  def edit
+    @task = mine.find(params[:id])
+  end
 
-    respond_to do |format|
-      format.json  { render :json => updated }
+  def update
+    @task = mine.find(params[:id])
+    
+    if @task.update(task_params)
+      redirect_to root_path
+    else
+      render "edit"
     end
   end
 
