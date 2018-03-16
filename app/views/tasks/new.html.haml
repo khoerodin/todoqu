@@ -1,0 +1,32 @@
+.container
+  .row.justify-content-center
+    .col-md-12
+
+      .display-4.mb-4  New Task      
+        
+      - if @task.errors.any?
+        .alert.alert-danger.alert-dismissible.fade.show{:role => "alert"}
+          %h4.alert-heading 
+            = pluralize(@task.errors.count, "error") 
+            prohibited this task from being saved
+          - @task.errors.full_messages.each do |msg|
+            = msg
+
+          %button{:type => "button", "data-dismiss" => "alert", "aria-label" => "Close", :class => "close"}
+            %span{"aria-hidden" => "true"}
+              &times;
+      
+      = form_tag(create_path, method: "post") do
+        .form-group 
+          = label_tag(:name, :name.capitalize)
+          = text_field_tag(:name, '', class: 'form-control', name: 'task[name]', id: 'name', placeholder: 'Your task')
+        
+        .form-group
+          = label_tag(:priority, :priority.capitalize)
+          = select_tag(:priority, options_for_select([['Critical', 1], ['High', 2], ['Medium', 3], ['Low', 4]], 4), class: 'form-control', name: 'task[priority]', id: 'priority',)
+        
+        .form-group
+          = label_tag(:due, :due.capitalize)
+          = date_field(:due, '', value: Date.today, class: "form-control", name: 'task[due]', id: 'due')
+        
+        %button{:type => "submit", :class => "btn btn-primary"} Save Task

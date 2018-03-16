@@ -1,0 +1,22 @@
+- if ! @tasks.empty?
+
+  - @tasks.each do |task|
+
+    %li.list-group-item.d-flex.justify-content-between.align-items-center.task-list
+      .custom-control.custom-checkbox
+        %input{:type => "checkbox", :name => "task-check", :checked => task.completed, :class => "custom-control-input", :id => "#{task.id}"}
+        %label{:for => "#{task.id}", :class => "custom-control-label pointer"} 
+          = task.name
+        %span{:class => "badge badge-#{task_priority('badge', task.priority)} mx-2"}
+      
+      %div
+        %span.text-muted.mx-3 
+          = task.due.strftime('%d %b %Y')
+        %small
+          = link_to 'edit', edit_path(task.id), class: "text-muted", title: "Edit this task"
+          %span.text-muted •         
+          = link_to 'delete', destroy_path(task.id), method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: "text-muted", title: "Delete this task"
+
+- else
+  %li.list-group-item.d-flex.justify-content-between.align-items-center.text-muted
+    You do not have a task yet.

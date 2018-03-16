@@ -1,0 +1,12 @@
+.container
+  .row.justify-content-center
+    .col-md-12
+
+      %h1.display-4.mb-4 Edit Task
+      
+      = simple_form_for @task, url: update_path(@task.id), method: "put" do |f|
+        = f.input :name
+        = f.input :priority, collection: [['Critical', 1], ['High', 2], ['Medium', 3], ['Low', 4]]
+        = f.input :due, as: :date, order: [:day, :month, :year]
+        = f.input :completed
+        = f.button :submit, class: "btn btn-primary"
