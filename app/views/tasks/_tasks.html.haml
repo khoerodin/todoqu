@@ -8,6 +8,7 @@
         %label{:for => "#{task.id}", :class => "custom-control-label pointer"} 
           = task.name
         %span{:class => "badge badge-#{task_priority('badge', task.priority)} mx-2"}
+          = task_priority('text', task.priority)
       
       %div
         %span.text-muted.mx-3 

@@ -13,6 +13,7 @@
               %label{:for => "#{due.id}", :class => "custom-control-label pointer"} 
                 = due.name
               %span{:class => "badge badge-#{task_priority('badge', due.priority)} mx-2"}
+                = task_priority('text', task.priority)
             
             %div
               %span.text-muted.mx-3 
