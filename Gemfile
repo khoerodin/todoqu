@@ -68,5 +68,6 @@ gem 'devise'
 gem 'simple_form'
 gem 'select2-rails'
 gem "haml"
+gem "rubocop"
 # gem 'axlsx_rails'
 # gem 'zip-zip'

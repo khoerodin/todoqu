@@ -18,10 +18,10 @@ class TasksController < ApplicationController
     else
       tasks = mine
     end
-    
+
     # sorted by
     @tasks = tasks.order(sort == 'created_at' ? sort + " DESC" : sort)
-    
+
     render partial: 'tasks', locals: { tasks: @tasks }, layout: false 
   end
 
@@ -29,14 +29,14 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  def create    
+  def create
     @user = User.find(current_user[:id])
     @task = @user.tasks.new(task_params)
 
     if @task.save 
       redirect_to root_path
     else
-      render "new"
+      render 'new'
     end
   end
 
@@ -46,11 +46,11 @@ class TasksController < ApplicationController
 
   def update
     @task = mine.find(params[:id])
-    
+
     if @task.update(task_params)
       redirect_to root_path
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -74,6 +74,7 @@ class TasksController < ApplicationController
   end
 
   private
+
     def mine
       Task.where(user_id: current_user[:id])
     end
